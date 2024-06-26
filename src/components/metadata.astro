@@ -1,0 +1,59 @@
+---
+export interface Props {
+  author: string
+  description: string
+  title: string
+  slug?: string
+}
+
+// const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const { author, description, title, slug } = Astro.props
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<!-- <link rel="icon" type="image/x-icon" href="/favicon.ico" /> -->
+
+<!-- Canonical URL -->
+<!-- <link rel="canonical" href={canonicalURL} /> -->
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="author" content={author} />
+
+<!-- Theme Colour -->
+<meta name="theme-color" content="#0F172A" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<!-- <meta
+  property="og:image"
+  content={slug ? new URL(`/${slug}/og.png`, Astro.url) : new URL("/images/ve.png", Astro.url)}
+/> -->
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={title} />
+<meta property="og:image:type" content="image/png" />
+
+<!-- Twitter -->
+<meta property="twitter:domain" content={Astro.url} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<!-- <meta
+  name="twitter:image"
+  content={slug ? new URL(`/${slug}/og.png`, Astro.url) : new URL("/images/ve.png", Astro.url)}
+/> -->
+<meta name="twitter:image:alt" content={title} />
+
+<!-- RSS auto-discovery -->
+<!-- <link rel="alternate" type="application/rss+xml" title="Velocidad de Escape" href="/rss.xml" /> -->

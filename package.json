@@ -1,0 +1,23 @@
+{
+  "name": "astro-kubrick",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.7.0",
+    "@astrojs/mdx": "^3.1.2",
+    "@astrojs/tailwind": "^5.1.0",
+    "astro": "^4.11.1",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.5.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.8.2"
+  }
+}

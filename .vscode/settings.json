@@ -1,0 +1,10 @@
+{
+  "[astro]": {
+      "editor.defaultFormatter": "biomejs.biome",
+      "editor.codeActionsOnSave": {
+        "quickfix.biome": "explicit"
+      },
+      "editor.tabSize": 2,
+      "editor.formatOnSave": true
+    },
+}

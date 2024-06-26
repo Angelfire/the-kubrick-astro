@@ -1,0 +1,67 @@
+---
+import type { GetStaticPathsOptions } from "astro"
+import { Image } from "astro:assets"
+import { getCollection } from "astro:content"
+
+import BlogLayout from "@/layouts/blog-layout.astro"
+
+import FormattedDate from "@/components/formatted-date.astro"
+
+import { SITE_AUTHOR, SITE_DESCRIPTION, SITE_TITLE } from "@/consts"
+import { getUniqueTags, sortPostsDate } from "@/lib/utils"
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const posts = await getCollection("blog")
+
+  const sortedPosts = sortPostsDate(posts)
+  const uniqueTags = getUniqueTags(posts)
+
+  return paginate(sortedPosts, { props: { uniqueTags }, pageSize: 4 })
+}
+
+const { page, uniqueTags } = Astro.props
+---
+
+<BlogLayout
+  author={SITE_AUTHOR}
+  description={SITE_DESCRIPTION}
+  title={SITE_TITLE}
+>
+  <section slot="posts">
+    {
+      page.data.map(({ slug, data: { heroImage, title, pubDate, tags } }) => (
+        <article class="mb-10">
+          <h2 class="font-bold font-trebuchet text-xl text-gray-carbon">
+            <a href={`/${slug}/`}>{title}</a>
+          </h2>
+          <p class="font-arial text-xs text-gray-lucky">
+            <FormattedDate date={pubDate} />
+          </p>
+          {heroImage && <Image width={720} height={360} src={heroImage} alt="" />}
+          <p class="flex justify-center font-lucida text-xs my-3">
+            <span class="mr-1 text-gray-lucky">Tags:</span> {
+              tags?.map((tag, index) => (
+                <span >
+                  <a class="text-blue-french hover:text-blue-maritime hover:underline" href={`/tags/${tag}`}>{tag}</a>{index < tags.length - 1 && ', '}
+                </span>
+              ))
+            }
+          </p>
+
+        </article>
+      ))
+    }
+  </section>
+  <div slot="aside">
+    <div>
+      <h2 class="font-lucida text-xs font-bold">Tags</h2>
+      <ul class="flex flex-col ml-3 mt-1 leading-3">
+        {uniqueTags.map((tag: string) => (
+          <li>
+            <span class="text-gray-lucky text-[0.75rem] mr-1">&raquo;</span><a class="text-blue-french hover:text-blue-maritime hover:underline text-xs font-lucida" href={`/tags/${tag}`}>{tag}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</BlogLayout>
