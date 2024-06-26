@@ -6,6 +6,7 @@ import { getCollection } from "astro:content"
 import BlogLayout from "@/layouts/blog-layout.astro"
 
 import FormattedDate from "@/components/formatted-date.astro"
+import Sidebar from "@/components/sidebar.astro"
 
 import { SITE_AUTHOR, SITE_DESCRIPTION, SITE_TITLE } from "@/consts"
 import { getUniqueTags, sortPostsDate } from "@/lib/utils"
@@ -53,15 +54,6 @@ const { page, uniqueTags } = Astro.props
     }
   </section>
   <div slot="aside">
-    <div>
-      <h2 class="font-lucida text-xs font-bold">Tags</h2>
-      <ul class="flex flex-col ml-3 mt-1 leading-3">
-        {uniqueTags.map((tag: string) => (
-          <li>
-            <span class="text-gray-lucky text-[0.75rem] mr-1">&raquo;</span><a class="text-blue-french hover:text-blue-maritime hover:underline text-xs font-lucida" href={`/tags/${tag}`}>{tag}</a>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Sidebar tags={uniqueTags}>
   </div>
 </BlogLayout>

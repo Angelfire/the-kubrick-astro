@@ -1,0 +1,19 @@
+---
+interface Props {
+  tags: string[]
+}
+
+const { tags } = Astro.props
+---
+<>
+  <div>
+    <h2 class="font-lucida text-xs font-bold">Tags</h2>
+    <ul class="flex flex-col ml-3 mt-1 leading-3">
+      {tags.map((tag: string) => (
+        <li>
+          <span class="text-gray-lucky text-[0.75rem] mr-1">&raquo;</span><a class="text-blue-french hover:text-blue-maritime hover:underline text-xs font-lucida" href={`/tags/${tag}`}>{tag}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</>
