@@ -9,26 +9,23 @@ interface Props {
   slug: string
 }
 
-// TODO: improve this pagination to avoid showind the next post in the last post and the previous post in the first post
-
 const { slug } = Astro.props
 
 const cleanSlug = slug.replace("/", "")
 
 const currentIndex = sortedPosts.findIndex(post => cleanSlug === post.slug)
 
-const nextPost = posts[currentIndex + 1]
-const prevPost = posts[currentIndex - 1]
+const nextPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null
+const prevPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null
 ---
-
-<aside class="flex justify-between">
+<div class="flex flex-row gap-x-4 w-full">
   {
     nextPost && (
-      <div>
+      <div class="grow text-left">
         <span class="text-gray-lucky text-[0.75rem]">&laquo;</span>
         <a
           href={`/${nextPost.slug}/`}
-          class="text-blue-french hover:text-blue-maritime hover:underline font-lucida text-xs"
+          class="text-left grow text-blue-french hover:text-blue-maritime hover:underline font-lucida text-xs"
         >
           {nextPost.data.title}
         </a>
@@ -37,10 +34,10 @@ const prevPost = posts[currentIndex - 1]
   }
   {
     prevPost && (
-      <div>
+      <div class="grow text-right">
         <a
           href={`/${prevPost.slug}/`}
-          class="text-blue-french hover:text-blue-maritime hover:underline font-lucida text-xs"
+          class=" text-blue-french hover:text-blue-maritime hover:underline font-lucida text-xs"
         >
           {prevPost.data.title}
         </a>
@@ -48,4 +45,4 @@ const prevPost = posts[currentIndex - 1]
       </div>
     )
   }
-</aside>
+</div>
