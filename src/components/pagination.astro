@@ -1,14 +1,21 @@
 ---
-import { getCollection } from "astro:content"
-import { basename } from "node:path"
-
 import { sortPostsDate } from "@/lib/utils"
+import { getCollection } from "astro:content"
 
 const posts = await getCollection("blog")
 const sortedPosts = sortPostsDate(posts)
-const currentIndex = sortedPosts.findIndex(post => {
-  return basename(Astro.url.pathname) === post.slug
-})
+
+interface Props {
+  slug: string
+}
+
+// TODO: improve this pagination to avoid showind the next post in the last post and the previous post in the first post
+
+const { slug } = Astro.props
+
+const cleanSlug = slug.replace("/", "")
+
+const currentIndex = sortedPosts.findIndex(post => cleanSlug === post.slug)
 
 const nextPost = posts[currentIndex + 1]
 const prevPost = posts[currentIndex - 1]
