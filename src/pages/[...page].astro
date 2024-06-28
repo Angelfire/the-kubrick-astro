@@ -8,8 +8,8 @@ import BlogLayout from "@/layouts/blog-layout.astro"
 import FormattedDate from "@/components/formatted-date.astro"
 import Sidebar from "@/components/sidebar.astro"
 
-import { SITE_AUTHOR, SITE_DESCRIPTION, SITE_TITLE } from "@/consts"
 import { getUniqueTags, sortPostsDate } from "@/lib/utils"
+import { siteConfig } from "@/site.config"
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const posts = await getCollection("blog")
@@ -24,9 +24,9 @@ const { page, uniqueTags } = Astro.props
 ---
 
 <BlogLayout
-  author={SITE_AUTHOR}
-  description={SITE_DESCRIPTION}
-  title={SITE_TITLE}
+  author={siteConfig.author}
+  description={siteConfig.description}
+  title={siteConfig.title}
 >
   <section slot="posts">
     {

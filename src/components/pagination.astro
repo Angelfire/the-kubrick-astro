@@ -1,0 +1,44 @@
+---
+import { getCollection } from "astro:content"
+import { basename } from "node:path"
+
+import { sortPostsDate } from "@/lib/utils"
+
+const posts = await getCollection("blog")
+const sortedPosts = sortPostsDate(posts)
+const currentIndex = sortedPosts.findIndex(post => {
+  return basename(Astro.url.pathname) === post.slug
+})
+
+const nextPost = posts[currentIndex + 1]
+const prevPost = posts[currentIndex - 1]
+---
+
+<aside class="flex justify-between">
+  {
+    nextPost && (
+      <div>
+        <span class="text-gray-lucky text-[0.75rem]">&laquo;</span>
+        <a
+          href={`/${nextPost.slug}/`}
+          class="text-blue-french hover:text-blue-maritime hover:underline font-lucida text-xs"
+        >
+          {nextPost.data.title}
+        </a>
+      </div>
+    )
+  }
+  {
+    prevPost && (
+      <div>
+        <a
+          href={`/${prevPost.slug}/`}
+          class="text-blue-french hover:text-blue-maritime hover:underline font-lucida text-xs"
+        >
+          {prevPost.data.title}
+        </a>
+        <span class="text-gray-lucky text-[0.75rem]">&raquo;</span>
+      </div>
+    )
+  }
+</aside>
