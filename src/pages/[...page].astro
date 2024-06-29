@@ -17,7 +17,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const sortedPosts = sortPostsDate(posts)
   const uniqueTags = getUniqueTags(posts)
 
-  return paginate(sortedPosts, { props: { uniqueTags }, pageSize: 5 })
+  return paginate(sortedPosts, { props: { uniqueTags }, pageSize: siteConfig.paginationSize })
 }
 
 const { page, uniqueTags } = Astro.props
