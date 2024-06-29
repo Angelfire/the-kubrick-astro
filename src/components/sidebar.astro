@@ -1,11 +1,12 @@
 ---
 interface Props {
   tags: string[]
+  categories: string[]
 }
 
-const { tags } = Astro.props
+const { tags, categories } = Astro.props
 ---
-<>
+<div class="flex flex-col gap-y-4">
   <div>
     <h2 class="font-lucida text-xs font-bold">Tags</h2>
     <ul class="flex flex-col ml-3 mt-1 leading-3">
@@ -16,4 +17,14 @@ const { tags } = Astro.props
       ))}
     </ul>
   </div>
-</>
+  <div>
+    <h2 class="font-lucida text-xs font-bold">Categories</h2>
+    <ul class="flex flex-col ml-3 mt-1 leading-3">
+      {categories.map((category: string) => (
+        <li>
+          <span class="text-gray-lucky text-[0.75rem] mr-1">&raquo;</span><a class="text-blue-french hover:text-blue-maritime hover:underline text-xs font-lucida" href={`/category/${category}`}>{category}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>

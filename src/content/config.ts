@@ -1,5 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 
+import { CATEGORIES } from '@/site.config';
+
 const blog = defineCollection({
 	type: 'content',
 	// Type-check frontmatter using a schema
@@ -11,6 +13,7 @@ const blog = defineCollection({
 		updatedDate: z.coerce.date().optional(),
 		heroImage: z.string().optional(),
 		tags: z.array(z.string()).optional(),
+		category: z.enum(CATEGORIES),
 	}),
 });
 

@@ -15,3 +15,15 @@ export function getUniqueTags(posts: CollectionEntry<"blog">[] = []) {
 
   return Array.from(uniqueTags)
 }
+
+export function getUniqueCategories(posts: CollectionEntry<"blog">[] = []): string[] {
+  const uniqueCategories = new Set<string>()
+
+  for (const post of posts) {
+    if (post.data.category) {
+      uniqueCategories.add(post.data.category)
+    }
+  }
+
+  return Array.from(uniqueCategories)
+}

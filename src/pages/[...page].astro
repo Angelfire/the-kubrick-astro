@@ -8,7 +8,7 @@ import BlogLayout from "@/layouts/blog-layout.astro"
 import FormattedDate from "@/components/formatted-date.astro"
 import Sidebar from "@/components/sidebar.astro"
 
-import { getUniqueTags, sortPostsDate } from "@/lib/utils"
+import { getUniqueCategories, getUniqueTags, sortPostsDate } from "@/lib/utils"
 import { siteConfig } from "@/site.config"
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
@@ -16,11 +16,15 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 
   const sortedPosts = sortPostsDate(posts)
   const uniqueTags = getUniqueTags(posts)
+  const uniqueCategories = getUniqueCategories(posts)
 
-  return paginate(sortedPosts, { props: { uniqueTags }, pageSize: siteConfig.paginationSize })
+  return paginate(sortedPosts, {
+    props: { uniqueTags, uniqueCategories },
+    pageSize: siteConfig.paginationSize,
+  })
 }
 
-const { page, uniqueTags } = Astro.props
+const { page, uniqueTags, uniqueCategories } = Astro.props
 ---
 
 <BlogLayout
@@ -30,7 +34,7 @@ const { page, uniqueTags } = Astro.props
 >
   <section slot="posts">
     {
-      page.data.map(({ slug, data: { heroImage, title, pubDate, tags } }) => (
+      page.data.map(({ slug, data: { category, heroImage, title, pubDate, tags } }) => (
         <article class="mb-10">
           <h2 class="font-bold font-trebuchet text-xl text-gray-carbon">
             <a href={`/${slug}/`}>{title}</a>
@@ -39,21 +43,26 @@ const { page, uniqueTags } = Astro.props
             <FormattedDate date={pubDate} />
           </p>
           {heroImage && <Image width={720} height={360} src={heroImage} alt="" />}
-          <p class="flex justify-center font-lucida text-xs my-3">
-            <span class="mr-1 text-gray-lucky">Tags:</span> {
-              tags?.map((tag, index) => (
-                <span >
-                  <a class="text-blue-french hover:text-blue-maritime hover:underline" href={`/tags/${tag}`}>{tag}</a>{index < tags.length - 1 && ', '}
-                </span>
-              ))
-            }
-          </p>
+          <div class="my-3">
+            <p class="flex justify-center font-lucida text-xs">
+              <span class="mr-1 text-gray-lucky">Tags:</span> {
+                tags?.map((tag, index) => (
+                  <span >
+                    <a class="text-blue-french hover:text-blue-maritime hover:underline" href={`/tags/${tag}`}>{tag}</a>{index < tags.length - 1 && ', '}
+                  </span>
+                ))
+              }
+            </p>
+            <p class="flex justify-center font-lucida text-xs">
+              <span class="mr-1 text-gray-lucky">Posted in</span><a class="text-blue-french hover:text-blue-maritime hover:underline" href={`/category/${category}`}>{category}</a>
+            </p>
+          </div>
 
         </article>
       ))
     }
   </section>
   <div slot="aside">
-    <Sidebar tags={uniqueTags}>
+    <Sidebar tags={uniqueTags} categories={uniqueCategories}>
   </div>
 </BlogLayout>
