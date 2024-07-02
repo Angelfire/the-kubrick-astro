@@ -4,38 +4,48 @@ import { Image } from "astro:assets"
 import type { CollectionEntry } from "astro:content"
 import { getCollection } from "astro:content"
 
-interface Props {
-  page: Page<CollectionEntry<"blog">>
-  tags: string[]
-  categories: string[]
-}
-
-import { getUniqueCategories, getUniqueTags, sortPostsDate } from "@/lib/utils"
+import {
+  getUniqueCategories,
+  getUniqueTags,
+  sluglify,
+  sortPostsDate,
+  unsluglify,
+} from "@/lib/utils"
 import { siteConfig } from "@/site.config"
 
 import FormattedDate from "@/components/formatted-date.astro"
 import Sidebar from "@/components/sidebar.astro"
 import BlogLayout from "@/layouts/blog-layout.astro"
 
+interface Props {
+  page: Page<CollectionEntry<"blog">>
+  tags: string[]
+  categories: string[]
+}
+
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const posts = await getCollection("blog")
-  const tags = getUniqueTags(posts)
   const sortedPosts = sortPostsDate(posts)
   const categories = getUniqueCategories(posts)
+  const tags = getUniqueTags(posts)
 
-  return tags.flatMap(tag => {
-    const filterPosts = sortedPosts.filter(post => post.data.tags?.includes(tag))
+  return categories.flatMap(category => {
+    const unsluglifyNameCategory = unsluglify(category.toLowerCase())
+
+    const filterPosts = sortedPosts.filter(
+      post => post.data.category.toLowerCase() === unsluglifyNameCategory
+    )
 
     return paginate(filterPosts, {
       props: { categories, tags },
-      params: { tag },
+      params: { category: sluglify(category.toLowerCase()) },
       pageSize: 20,
     })
   })
 }
 
 const { page, tags, categories } = Astro.props
-const { tag } = Astro.params
+const { category } = Astro.params
 ---
 
 <BlogLayout
@@ -44,7 +54,7 @@ const { tag } = Astro.params
   title={siteConfig.title}
 >
 <section slot="posts">
-  <h2 class="font-trebuchet text-xl font-bold text-center">Archive for the '{tag}' Tag</h2>
+  <h2 class="font-trebuchet text-xl font-bold text-center">Archive for the '{category}' Category</h2>
   {
     page.data.map(({ slug, data: { category, heroImage, title, pubDate, tags } }) => (
       <article class="mb-10">
@@ -75,6 +85,6 @@ const { tag } = Astro.params
   }
 </section>
   <div slot="aside">
-    <Sidebar tags={tags} categories={categories} searchString={tag}>
+    <Sidebar tags={tags} categories={categories} searchString={category}>
   </div>
 </BlogLayout>

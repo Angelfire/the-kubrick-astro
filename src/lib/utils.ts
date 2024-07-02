@@ -17,13 +17,15 @@ export function getUniqueTags(posts: CollectionEntry<"blog">[] = []) {
 }
 
 export function getUniqueCategories(posts: CollectionEntry<"blog">[] = []): string[] {
-  const uniqueCategories = new Set<string>()
+  const categories = new Set(posts.map((post) => post.data.category))
 
-  for (const post of posts) {
-    if (post.data.category) {
-      uniqueCategories.add(post.data.category)
-    }
-  }
+  return Array.from(categories)
+}
 
-  return Array.from(uniqueCategories)
+export function sluglify(text: string) {
+	return text.replace(/\s+/g, '-')
+}
+
+export function unsluglify(text: string) {
+	return text.replace(/-/g, ' ')
 }
