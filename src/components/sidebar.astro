@@ -2,11 +2,13 @@
 interface Props {
   tags: string[]
   categories: string[]
+  searchString?: string
 }
 
-const { tags, categories } = Astro.props
+const { searchString, tags, categories } = Astro.props
 ---
 <div class="flex flex-col gap-y-4">
+ {searchString && <p class="text-xs font-trebuchet">You are currently browsing the archives for this topic: {searchString}.</p> }
   <div>
     <h2 class="font-lucida text-xs font-bold">Tags</h2>
     <ul class="flex flex-col ml-3 mt-1 leading-3">

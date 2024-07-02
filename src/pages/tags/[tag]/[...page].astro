@@ -1,0 +1,82 @@
+---
+import type { GetStaticPathsOptions, Page } from "astro"
+import { Image } from "astro:assets"
+import type { CollectionEntry } from "astro:content"
+
+import { getCollection } from "astro:content"
+
+interface Props {
+  page: Page<CollectionEntry<"blog">>
+  uniqueTags: string[]
+  uniqueCategories: string[]
+}
+
+import FormattedDate from "@/components/formatted-date.astro"
+import Sidebar from "@/components/sidebar.astro"
+import BlogLayout from "@/layouts/blog-layout.astro"
+
+import { getUniqueCategories, getUniqueTags, sortPostsDate } from "@/lib/utils"
+import { siteConfig } from "@/site.config"
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const posts = await getCollection("blog")
+  const tags = getUniqueTags(posts)
+  const sortedPosts = sortPostsDate(posts)
+  const uniqueTags = getUniqueTags(posts)
+  const uniqueCategories = getUniqueCategories(posts)
+
+  return tags.flatMap(tag => {
+    const filterPosts = sortedPosts.filter(post => post.data.tags?.includes(tag))
+
+    return paginate(filterPosts, {
+      props: { uniqueTags, uniqueCategories },
+      params: { tag },
+      pageSize: 50,
+    })
+  })
+}
+
+const { page, uniqueTags, uniqueCategories } = Astro.props
+const { tag } = Astro.params
+---
+
+<BlogLayout
+  author={siteConfig.author}
+  description={siteConfig.description}
+  title={siteConfig.title}
+>
+<section slot="posts">
+  <h2 class="font-trebuchet text-xl font-bold text-center">Archive for the '{tag}' Category</h2>
+  {
+    page.data.map(({ slug, data: { category, heroImage, title, pubDate, tags } }) => (
+      <article class="mb-10">
+        <h2 class="font-bold font-trebuchet text-xl text-gray-carbon">
+          <a href={`/${slug}/`}>{title}</a>
+        </h2>
+        <p class="font-arial text-xs text-gray-lucky">
+          <FormattedDate date={pubDate} />
+        </p>
+        {heroImage && <Image width={720} height={360} src={heroImage} alt="" />}
+        <div class="my-3">
+          <p class="flex justify-center font-lucida text-xs">
+            <span class="mr-1 text-gray-lucky">Tags:</span> {
+              tags?.map((tag, index) => (
+                <span >
+                  <a class="text-blue-french hover:text-blue-maritime hover:underline" href={`/tags/${tag}`}>{tag}</a>{index < tags.length - 1 && ', '}
+                </span>
+              ))
+            }
+          </p>
+          <p class="flex justify-center font-lucida text-xs">
+            <span class="mr-1 text-gray-lucky">Posted in</span><a class="text-blue-french hover:text-blue-maritime hover:underline" href={`/category/${category}`}>{category}</a>
+          </p>
+        </div>
+
+      </article>
+    ))
+  }
+</section>
+  <div slot="aside">
+    <Sidebar tags={uniqueTags} categories={uniqueCategories} searchString={tag}>
+  </div>
+</BlogLayout>
