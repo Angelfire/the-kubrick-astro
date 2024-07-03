@@ -22,7 +22,9 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.2",
+    "@tailwindcss/typography": "^0.5.13",
     "@types/markdown-it": "^14.1.1",
+    "@types/node": "^20.14.9",
     "@types/sanitize-html": "^2.11.0"
   }
 }

@@ -28,7 +28,9 @@ const { Content } = await post.render()
   title={post.data.title}
   slug={post.slug}
 >
-  <Content />
+  <div class="prose prose-p:font-lucida prose-p:text-xs prose-a:text-blue-french prose-a:no-underline prose-a:hover:text-blue-maritime prose-a:hover:underline">
+    <Content />
+  </div>
   <p class="my-8 text-xs text-gray-lucky font-lucida p-2 bg-gray-doctor border-y border-gray-steam">
     This entry was posted on Friday, October 17th, 2008 at 4:33 am and is filed under Uncategorized. You can follow any responses to this entry through the <a class="text-blue-french hover:text-blue-maritime hover:underline" href="https://the-kubrick-astro.vercel.app/rss.xml">RSS 2.0</a> feed.
   </p>

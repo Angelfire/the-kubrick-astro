@@ -31,6 +31,18 @@ Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptio
 
 Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.
 
+## Anchors
+
+### Syntax
+
+```markdown
+[Alt text](https://srhart.co/)
+```
+
+### Output
+
+[Alt text](https://srhart.co/)
+
 ## Images
 
 ### Syntax
