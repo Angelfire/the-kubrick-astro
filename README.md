@@ -1,7 +1,6 @@
 # Astro Starter Kit: Kubrick theme
 
-![kubrick](https://github.com/Angelfire/the-kubrick-astro/assets/315504/5f94c5c6-bc1b-444c-8422-d83ade19255e)
-
+![kubrick-astro](https://github.com/Angelfire/the-kubrick-astro/assets/315504/9cf3d0e2-4c8a-475e-946e-1afd03a99256)
 
 ```sh
 npm create astro@latest -- --template minimal
