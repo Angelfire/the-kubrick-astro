@@ -2,6 +2,7 @@
 import BlogPost from "@/layouts/blog-post.astro"
 import { type CollectionEntry, getCollection } from "astro:content"
 
+import { formatDate } from "@/lib/utils"
 import { siteConfig } from "@/site.config"
 
 export async function getStaticPaths() {
@@ -17,7 +18,9 @@ type Props = CollectionEntry<"blog">
 
 const post = Astro.props
 
-const { category } = post.data
+const { category, pubDate } = post.data
+
+const longDate = formatDate(pubDate, "long")
 
 const { Content } = await post.render()
 ---
@@ -32,6 +35,6 @@ const { Content } = await post.render()
     <Content />
   </div>
   <p class="my-8 text-xs text-gray-lucky font-lucida p-2 bg-gray-doctor border-y border-gray-steam">
-    This entry was posted on Friday, October 17th, 2008  and is filed under {category}. You can follow any responses to this entry through the <a class="text-blue-french hover:text-blue-maritime hover:underline" href="/rss.xml">RSS 2.0</a> feed.
+    This entry was posted on <time datetime={pubDate.toISOString()}>{longDate}</time> and is filed under {category}. You can follow any responses to this entry through the <a class="text-blue-french hover:text-blue-maritime hover:underline" href="/rss.xml">RSS 2.0</a> feed.
   </p>
 </BlogPost>

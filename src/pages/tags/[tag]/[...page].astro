@@ -1,8 +1,8 @@
 ---
-import type { GetStaticPathsOptions, Page } from "astro"
 import { Image } from "astro:assets"
 import type { CollectionEntry } from "astro:content"
 import { getCollection } from "astro:content"
+import type { GetStaticPathsOptions, Page } from "astro"
 
 interface Props {
   page: Page<CollectionEntry<"blog">>
@@ -10,10 +10,9 @@ interface Props {
   categories: string[]
 }
 
-import { getUniqueCategories, getUniqueTags, sortPostsDate } from "@/lib/utils"
+import { formatDate, getUniqueCategories, getUniqueTags, sortPostsDate } from "@/lib/utils"
 import { siteConfig } from "@/site.config"
 
-import FormattedDate from "@/components/formatted-date.astro"
 import Sidebar from "@/components/sidebar.astro"
 import BlogLayout from "@/layouts/blog-layout.astro"
 
@@ -52,7 +51,7 @@ const { tag } = Astro.params
           <a href={`/blog/${slug}/`}>{title}</a>
         </h2>
         <p class="font-arial text-xs text-gray-lucky">
-          <FormattedDate date={pubDate} />
+          <time datetime={pubDate.toISOString()}>{formatDate(pubDate, 'short')}</time>
         </p>
         {heroImage && <Image width={720} height={360} src={heroImage} alt="" />}
         <div class="my-3">

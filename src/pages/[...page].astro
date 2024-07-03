@@ -1,14 +1,13 @@
 ---
-import type { GetStaticPathsOptions } from "astro"
 import { Image } from "astro:assets"
 import { getCollection } from "astro:content"
+import type { GetStaticPathsOptions } from "astro"
 
-import FormattedDate from "@/components/formatted-date.astro"
 import PostExcerpt from "@/components/post-excerpt.astro"
 import Sidebar from "@/components/sidebar.astro"
 import BlogLayout from "@/layouts/blog-layout.astro"
 
-import { getUniqueCategories, getUniqueTags, sortPostsDate } from "@/lib/utils"
+import { formatDate, getUniqueCategories, getUniqueTags, sortPostsDate } from "@/lib/utils"
 import { siteConfig } from "@/site.config"
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
@@ -40,7 +39,7 @@ const { page, uniqueTags, uniqueCategories } = Astro.props
             <a href={`/blog/${slug}/`}>{title}</a>
           </h2>
           <p class="font-arial text-xs text-gray-lucky">
-            <FormattedDate date={pubDate} />
+            <time datetime={pubDate.toISOString()}>{formatDate(pubDate, 'short')}</time>
           </p>
           {heroImage && <Image width={720} height={360} src={heroImage} alt="" />}
           <p class="text-xs font-lucida my-3">
