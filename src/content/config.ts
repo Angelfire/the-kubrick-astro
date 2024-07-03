@@ -1,8 +1,8 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z } from 'astro:content'
 
-import { CATEGORIES } from '@/site.config';
+import { CATEGORIES } from '@/site.config'
 
-const blog = defineCollection({
+const blogCollection = defineCollection({
 	type: 'content',
 	// Type-check frontmatter using a schema
 	schema: z.object({
@@ -15,6 +15,16 @@ const blog = defineCollection({
 		tags: z.array(z.string()).optional(),
 		category: z.enum(CATEGORIES),
 	}),
-});
+})
 
-export const collections = { blog };
+const pageCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+  }),
+})
+
+export const collections = {
+	'blog': blogCollection,
+	'page': pageCollection
+}

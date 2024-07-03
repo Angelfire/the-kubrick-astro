@@ -54,36 +54,35 @@ const { category } = Astro.params
   title={siteConfig.title}
 >
 <section slot="posts">
-  <h2 class="font-trebuchet text-xl font-bold text-center">Archive for the '{category}' Category</h2>
-  {
-    page.data.map(({ slug, data: { category, heroImage, title, pubDate, tags } }) => (
-      <article class="mb-10">
-        <h2 class="font-bold font-trebuchet text-xl text-gray-carbon">
-          <a href={`/${slug}/`}>{title}</a>
-        </h2>
-        <p class="font-arial text-xs text-gray-lucky">
-          <FormattedDate date={pubDate} />
-        </p>
-        {heroImage && <Image width={720} height={360} src={heroImage} alt="" />}
-        <div class="my-3">
-          <p class="flex justify-center font-lucida text-xs">
-            <span class="mr-1 text-gray-lucky">Tags:</span> {
-              tags?.map((tag, index) => (
-                <span >
-                  <a class="text-blue-french hover:text-blue-maritime hover:underline" href={`/tags/${tag}`}>{tag}</a>{index < tags.length - 1 && ', '}
-                </span>
-              ))
-            }
+    <h2 class="font-trebuchet text-xl font-bold text-center">Archive for the '{category}' Category</h2>
+    {
+      page.data.map(({ slug, data: { category, heroImage, title, pubDate, tags } }) => (
+        <article class="mb-10">
+          <h2 class="font-bold font-trebuchet text-xl text-gray-carbon">
+            <a href={`/blog/${slug}/`}>{title}</a>
+          </h2>
+          <p class="font-arial text-xs text-gray-lucky">
+            <FormattedDate date={pubDate} />
           </p>
-          <p class="flex justify-center font-lucida text-xs">
-            <span class="mr-1 text-gray-lucky">Posted in</span><a class="text-blue-french hover:text-blue-maritime hover:underline" href={`/category/${category}`}>{category}</a>
-          </p>
-        </div>
-
-      </article>
-    ))
-  }
-</section>
+          {heroImage && <Image width={720} height={360} src={heroImage} alt="" />}
+          <div class="my-3">
+            <p class="flex justify-center font-lucida text-xs">
+              <span class="mr-1 text-gray-lucky">Tags:</span> {
+                tags?.map((tag, index) => (
+                  <span >
+                    <a class="text-blue-french hover:text-blue-maritime hover:underline" href={`/tags/${tag}`}>{tag}</a>{index < tags.length - 1 && ', '}
+                  </span>
+                ))
+              }
+            </p>
+            <p class="flex justify-center font-lucida text-xs">
+              <span class="mr-1 text-gray-lucky">Posted in</span><a class="text-blue-french hover:text-blue-maritime hover:underline" href={`/category/${category}`}>{category}</a>
+            </p>
+          </div>
+        </article>
+      ))
+    }
+  </section>
   <div slot="aside">
     <Sidebar tags={tags} categories={categories} searchString={category}>
   </div>

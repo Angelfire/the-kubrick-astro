@@ -37,7 +37,7 @@ const { page, uniqueTags, uniqueCategories } = Astro.props
       page.data.map(({ slug, data: { category, heroImage, title, pubDate, tags } }) => (
         <article class="mb-10">
           <h2 class="font-bold font-trebuchet text-xl text-gray-carbon">
-            <a href={`/${slug}/`}>{title}</a>
+            <a href={`/blog/${slug}/`}>{title}</a>
           </h2>
           <p class="font-arial text-xs text-gray-lucky">
             <FormattedDate date={pubDate} />
@@ -57,7 +57,6 @@ const { page, uniqueTags, uniqueCategories } = Astro.props
               <span class="mr-1 text-gray-lucky">Posted in</span><a class="text-blue-french hover:text-blue-maritime hover:underline" href={`/category/${category}`}>{category}</a>
             </p>
           </div>
-
         </article>
       ))
     }

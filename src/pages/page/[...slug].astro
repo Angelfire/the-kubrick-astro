@@ -1,0 +1,45 @@
+---
+import { getCollection } from "astro:content"
+
+import Sidebar from "@/components/sidebar.astro"
+import BlogLayout from "@/layouts/blog-layout.astro"
+
+import { getUniqueCategories, getUniqueTags } from "@/lib/utils"
+import { siteConfig } from "@/site.config"
+
+export async function getStaticPaths() {
+  const pages = await getCollection("page")
+  const posts = await getCollection("blog")
+  const categories = getUniqueCategories(posts)
+  const tags = getUniqueTags(posts)
+
+  return pages.flatMap(page => ({
+    params: { slug: page.slug },
+    props: { page, categories, tags },
+  }))
+}
+
+const { page, categories, tags } = Astro.props
+
+const { title } = page.data
+
+const { Content } = await page.render()
+---
+
+<BlogLayout
+  author={siteConfig.author}
+  description={siteConfig.description}
+  title={siteConfig.title}
+>
+  <section slot="posts">
+    <h2 class="font-bold font-trebuchet text-xl text-gray-carbon">
+      {title}
+    </h2>
+    <div class="prose prose-p:font-lucida prose-p:text-xs prose-a:text-blue-french prose-a:no-underline prose-a:hover:text-blue-maritime prose-a:hover:underline prose-ul:ml-3 prose-ul:mt-1 prose-ul:leading-3 prose-ul:text-xs pprose-uprose-ul prose-ul:font-lucida">
+      <Content />
+    </div>
+  </section>
+  <div slot="aside">
+    <Sidebar tags={tags} categories={categories}>
+  </div>
+</BlogLayout>

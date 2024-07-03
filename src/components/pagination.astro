@@ -24,7 +24,7 @@ const prevPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null
       <div class="grow text-left">
         <span class="text-gray-lucky text-[0.75rem]">&laquo;</span>
         <a
-          href={`/${nextPost.slug}/`}
+          href={`/blog/${nextPost.slug}/`}
           class="text-left grow text-blue-french hover:text-blue-maritime hover:underline font-lucida text-xs"
         >
           {nextPost.data.title}
@@ -36,7 +36,7 @@ const prevPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null
     prevPost && (
       <div class="grow text-right">
         <a
-          href={`/${prevPost.slug}/`}
+          href={`/blog/${prevPost.slug}/`}
           class=" text-blue-french hover:text-blue-maritime hover:underline font-lucida text-xs"
         >
           {prevPost.data.title}
