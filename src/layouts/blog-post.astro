@@ -11,7 +11,7 @@ interface Props {
   author: string
   description: string
   title: string
-  slug: string
+  slug?: string
 }
 
 const { author, title, description, slug } = Astro.props
@@ -32,11 +32,12 @@ const { author, title, description, slug } = Astro.props
     <div class="container flex flex-col min-h-screen">
       <div class="rounded-lg border border-gray-colossus shadow-lg bg-white my-6">
         <Header />
-        <div class="w-2/3 container mt-5 mb-6">
+        {slug && ( <div class="w-2/3 container mt-5 mb-6">
           <Pagination slug={slug} />
-        </div>
+          </div> )
+        }
         <article class="w-2/3 container mb-8">
-          <h2 class="font-bold font-trebuchet text-xl text-gray-carbon">{title}</h2>
+          {slug && <h2 class="font-bold font-trebuchet text-xl text-gray-carbon">{title}</h2> }
           <slot />
         </article>
         <Footer />
