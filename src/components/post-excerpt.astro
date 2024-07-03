@@ -1,0 +1,46 @@
+---
+type PostExcerptProps = {
+  text: string
+  maxLength?: number
+  addEllipsis?: boolean
+}
+
+const { text, maxLength = 210, addEllipsis = true } = Astro.props as PostExcerptProps
+
+let postExcerpt = ""
+
+if (typeof text !== "string") {
+  throw new TypeError("text must be a string")
+}
+
+if (typeof maxLength !== "number") {
+  throw new TypeError("maxLength must be a number")
+}
+
+if (typeof addEllipsis !== "boolean") {
+  throw new TypeError("addEllipsis must be a boolean")
+}
+
+postExcerpt = text
+
+if (maxLength > 0) {
+  postExcerpt = postExcerpt.substring(0, maxLength)
+}
+
+if (addEllipsis) {
+  const postLength = postExcerpt.length
+
+  if (postLength > 0) {
+    const lastSpace = postExcerpt.lastIndexOf(" ")
+
+    postExcerpt = text.substring(0, maxLength)
+    postExcerpt = postExcerpt.substring(0, lastSpace)
+
+    if (addEllipsis) {
+      postExcerpt += "..."
+    }
+  }
+}
+---
+
+<Fragment set:text={postExcerpt} />
