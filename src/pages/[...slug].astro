@@ -7,7 +7,7 @@ import { siteConfig } from "@/site.config"
 export async function getStaticPaths() {
   const posts = await getCollection("blog")
 
-  return posts.map((post, i) => ({
+  return posts.map(post => ({
     params: { slug: post.slug },
     props: {
       ...post,
@@ -29,4 +29,7 @@ const { Content } = await post.render()
   slug={post.slug}
 >
   <Content />
+  <p class="my-8 text-xs text-gray-lucky font-lucida p-2 bg-gray-doctor border-y border-gray-steam">
+    This entry was posted on Friday, October 17th, 2008 at 4:33 am and is filed under Uncategorized. You can follow any responses to this entry through the <a class="text-blue-french hover:text-blue-maritime hover:underline" href="https://the-kubrick-astro.vercel.app/rss.xml">RSS 2.0</a> feed.
+  </p>
 </BlogPost>

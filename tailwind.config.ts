@@ -19,9 +19,11 @@ const config: Config = {
       'blue-warmspring': '#3974ae',
       'gray-carbon': '#333',
       'gray-colossus': '#979797',
+      'gray-doctor': '#f8f8f8',
       'gray-lucky': '#777',
       'gray-placebo': '#e3e3e3',
       'gray-platinum': '#dfdfdf',
+      'gray-steam': '#ddd',
       'white': '#fff',
     },
     fontFamily: {
