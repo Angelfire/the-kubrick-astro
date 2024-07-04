@@ -26,3 +26,18 @@ export const CATEGORIES = [
 	'Category 4',
 	'Category 5'
 ] as const
+
+export const BLOGROLL = [
+	{
+		title: 'Sr.Hart',
+		url: 'https://srhart.co'
+	},
+	{
+		title: 'Velocidad de Escape',
+		url: 'https://velocidadescape.com/'
+	},
+	{
+		title: 'Astro',
+		url: 'https://astro.build'
+	}
+] as const
