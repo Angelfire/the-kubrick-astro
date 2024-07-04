@@ -1,5 +1,5 @@
 ---
-import Emoji from "@/components/emoji.astro"
+import EmojiIcon from "@/components/icons/emoji.astro"
 import BlogPost from "@/layouts/blog-post.astro"
 
 import { siteConfig } from "@/site.config"
@@ -13,7 +13,7 @@ const title = `${siteConfig.title} - 404 You found a missing page!`
 >
   <div class="my-16">
     <div class="flex flex-col items-center justify-center gap-2">
-      <Emoji />
+      <EmojiIcon />
       <h2 class="text-center text-9xl font-bold font-lucida">404</h2>
       <p class="text-center text-3xl font-lucida">Oops! It looks like this page is lost in space!</p>
       <p class="text-center font-lucida">But do not worry, you can find plenty of other things in our homepage.</p>
