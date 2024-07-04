@@ -2,23 +2,22 @@
 import { Image } from "astro:assets"
 
 import BlogPost from "@/layouts/blog-post.astro"
-import { type CollectionEntry, getCollection } from "astro:content"
+import { getCollection } from "astro:content"
 
-import { formatDate } from "@/lib/utils"
+import { formatDate, getUniqueTags } from "@/lib/utils"
 import { siteConfig } from "@/site.config"
-
-type Props = CollectionEntry<"blog">
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog")
+  const tags = getUniqueTags(posts)
 
   return posts.map(post => ({
     params: { slug: post.slug },
-    props: post,
+    props: { post, tags },
   }))
 }
 
-const post = Astro.props
+const { post, tags } = Astro.props
 
 const { category, description, pubDate, heroImage, title } = post.data
 const longDate = formatDate(pubDate, "long")
@@ -35,7 +34,19 @@ const { Content } = await post.render()
   <div class="prose prose-p:font-lucida prose-p:text-xs prose-a:text-blue-french prose-a:no-underline prose-a:hover:text-blue-maritime prose-a:hover:underline prose-ul:ml-3 prose-ul:mt-1 prose-ul:leading-3 prose-ul:text-xs pprose-uprose-ul prose-ul:font-lucida">
     <Content />
   </div>
-  <p class="my-8 text-xs text-gray-lucky font-lucida p-2 bg-gray-doctor border-y border-gray-steam">
-    This entry was posted on <time datetime={pubDate.toISOString()}>{longDate}</time> and is filed under {category}. You can follow any responses to this entry through the <a class="text-blue-french hover:text-blue-maritime hover:underline" href="/rss.xml">RSS 2.0</a> feed.
-  </p>
+  <div class="my-6 space-y-5">
+    <p class="font-lucida text-xs">
+      <span class="mr-1 text-gray-lucky">Tags:</span> {
+        tags?.map((tag, index) => (
+          <span >
+            <a class="text-blue-french hover:text-blue-maritime hover:underline" href={`/tags/${tag}`}>{tag}</a>{index < tags.length - 1 && ', '}
+          </span>
+        ))
+      }
+    </p>
+    <p class="text-xs text-gray-lucky font-lucida p-2 bg-gray-doctor border-y border-gray-steam">
+      This entry was posted on <time datetime={pubDate.toISOString()}>{longDate}</time> and is filed under {category}. You can follow any responses to this entry through the <a class="text-blue-french hover:text-blue-maritime hover:underline" href="/rss.xml">RSS 2.0</a> feed.
+    </p>
+  </div>
+
 </BlogPost>
