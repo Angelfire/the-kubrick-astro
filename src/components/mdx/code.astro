@@ -3,7 +3,7 @@ import CheckIcon from "@/components/icons/check.astro"
 import CopyIcon from "@/components/icons/copy.astro"
 ---
 <!-- TODO: try to fix one line code block -->
-<pre class='shiki shiki-themes relative bg-neutral-200/30 code text-xs'><button aria-label="copy-button" class="copy-button absolute z-20 top-2 right-2 rounded-md transition-all ease-in max-w-full max-h-fit text-gray-400 hover:text-indigo-500 h-4"><CopyIcon /></button><span class="check-span absolute z-10 top-2 right-2 rounded-md transition-all ease-in opacity-0 text-green-600 max-w-full max-h-fit"><CheckIcon /></span><slot /></pre>
+<pre class='shiki shiki-themes relative bg-neutral-200/30 code text-xs'><button aria-label="copy-button" class="copy-button absolute z-20 top-2 right-2 transition-all ease-in max-w-full max-h-fit text-gray-platinum hover:text-gray-lucky"><CopyIcon /></button><span class="check-span absolute z-10 top-2 right-2 transition-all ease-in opacity-0 text-green-600 max-w-full max-h-fit"><CheckIcon /></span><slot /></pre>
 
 <script>
   const coppyBlock = () => {
