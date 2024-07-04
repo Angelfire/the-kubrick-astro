@@ -3,6 +3,7 @@ import type { GetStaticPathsOptions } from "astro"
 import { Image } from "astro:assets"
 import { getCollection } from "astro:content"
 
+import BlogPagination from "@/components/blog-pagination.astro"
 import PostExcerpt from "@/components/post-excerpt.astro"
 import Sidebar from "@/components/sidebar.astro"
 import BlogLayout from "@/layouts/blog-layout.astro"
@@ -62,6 +63,7 @@ const { page, uniqueTags, uniqueCategories } = Astro.props
         </article>
       ))
     }
+    <BlogPagination page={page} />
   </section>
   <div slot="aside">
     <Sidebar tags={uniqueTags} categories={uniqueCategories}>

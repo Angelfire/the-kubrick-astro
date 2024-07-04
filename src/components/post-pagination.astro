@@ -18,7 +18,7 @@ const currentIndex = sortedPosts.findIndex(post => cleanSlug === post.slug)
 const nextPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null
 const prevPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null
 ---
-<div class="flex flex-row gap-x-4 w-full">
+<nav aria-label="page navigation" class="flex flex-row gap-x-4 w-full">
   {
     nextPost && (
       <div class="grow text-left">
@@ -45,4 +45,4 @@ const prevPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null
       </div>
     )
   }
-</div>
+</nav>

@@ -3,7 +3,7 @@
 import Footer from "@/components/footer.astro"
 import Header from "@/components/header.astro"
 import Metadata from "@/components/metadata.astro"
-import Pagination from "@/components/pagination.astro"
+import PostPagination from "@/components/post-pagination.astro"
 
 import { ViewTransitions } from "astro:transitions"
 
@@ -34,7 +34,7 @@ const { author, title, description, slug } = Astro.props
         <Header />
         {slug && (
           <div class="w-2/3 container mt-5 mb-6">
-            <Pagination slug={slug} />
+            <PostPagination slug={slug} />
           </div>
           )
         }

@@ -1,0 +1,46 @@
+---
+import type { Page } from "astro"
+import type { CollectionEntry } from "astro:content"
+
+interface Props {
+  page: Page<CollectionEntry<"blog">>
+}
+
+const { page } = Astro.props
+
+const currentPage = page.currentPage
+const numPages = page.lastPage
+
+const isFirst = currentPage === 1
+const isLast = currentPage === numPages
+const prevPage = currentPage - 1 === 1 ? "" : currentPage - 1
+const nextPage = currentPage + 1
+---
+<nav aria-label="page navigation" class="flex flex-row gap-x-4 w-full">
+  {
+    !isFirst && (
+      <div class="grow text-left">
+        <span class="text-gray-lucky text-[0.75rem]">&laquo;</span>
+        <a
+          href={`/${prevPage}`}
+          class="text-left grow text-blue-french hover:text-blue-maritime hover:underline font-lucida text-xs"
+        >
+          Previous Page
+        </a>
+      </div>
+    )
+  }
+  {
+    !isLast && (
+      <div class="grow text-right">
+        <a
+          href={`/${nextPage}`}
+          class=" text-blue-french hover:text-blue-maritime hover:underline font-lucida text-xs"
+        >
+          Next Page
+        </a>
+        <span class="text-gray-lucky text-[0.75rem]">&raquo;</span>
+      </div>
+    )
+  }
+</nav>
