@@ -1,5 +1,6 @@
 ---
-title: About
+title: "About"
+description: "This is an example of a static page created with MD."
 ---
 
 Hello! I'm [Andrés Bedoya](https://srhart.co) I'm a Systems and Informatics Engineer and a dedicated JavaScript Developer with over 12 years of experience. My passion lies in creating engaging user interfaces and web applications using open-source technologies. Lately, I've been expanding my horizons into the backend world, enhancing my skills in Node.js and exploring serverless architectures with AWS.

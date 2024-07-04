@@ -20,15 +20,15 @@ export async function getStaticPaths() {
 
 const post = Astro.props
 
-const { category, pubDate, heroImage } = post.data
+const { category, description, pubDate, heroImage, title } = post.data
 const longDate = formatDate(pubDate, "long")
 const { Content } = await post.render()
 ---
 
 <BlogPost
   author={siteConfig.author}
-  description={post.data.description}
-  title={post.data.title}
+  description={description}
+  title={title}
   slug={post.slug}
 >
   {heroImage && <Image width={720} height={360} src={heroImage} alt="" class="mb-4" />}

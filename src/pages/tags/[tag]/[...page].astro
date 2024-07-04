@@ -1,8 +1,8 @@
 ---
+import type { GetStaticPathsOptions, Page } from "astro"
 import { Image } from "astro:assets"
 import type { CollectionEntry } from "astro:content"
 import { getCollection } from "astro:content"
-import type { GetStaticPathsOptions, Page } from "astro"
 
 interface Props {
   page: Page<CollectionEntry<"blog">>
@@ -39,8 +39,8 @@ const { tag } = Astro.params
 
 <BlogLayout
   author={siteConfig.author}
-  description={siteConfig.description}
-  title={siteConfig.title}
+  description=`Archive for the ${tag} Tag`
+  title=`${siteConfig.title} - Tag ${tag}`
 >
 <section slot="posts">
   <h2 class="font-trebuchet text-xl font-bold text-center">Archive for the '{tag}' Tag</h2>

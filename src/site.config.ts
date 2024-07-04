@@ -9,7 +9,7 @@ interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-	author: 'Author', // Site author
+	author: 'Andrés Bedoya', // Site author
 	title: 'Astro Kubrick Blog', // Site title.
 	description: 'The default Astro theme based on the famous Kubrick from WordPress.', // Description to display in the meta tags
 	lang: 'en-GB',

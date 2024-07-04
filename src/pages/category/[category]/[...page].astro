@@ -1,8 +1,8 @@
 ---
+import type { GetStaticPathsOptions, Page } from "astro"
 import { Image } from "astro:assets"
 import type { CollectionEntry } from "astro:content"
 import { getCollection } from "astro:content"
-import type { GetStaticPathsOptions, Page } from "astro"
 
 import {
   formatDate,
@@ -50,8 +50,8 @@ const { category } = Astro.params
 
 <BlogLayout
   author={siteConfig.author}
-  description={siteConfig.description}
-  title={siteConfig.title}
+  description=`Archive for the ${category} Category`
+  title=`${siteConfig.title} - Category ${category}`
 >
 <section slot="posts">
     <h2 class="font-trebuchet text-xl font-bold text-center">Archive for the '{category}' Category</h2>
