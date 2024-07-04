@@ -1,7 +1,7 @@
 ---
+import type { GetStaticPathsOptions } from "astro"
 import { Image } from "astro:assets"
 import { getCollection } from "astro:content"
-import type { GetStaticPathsOptions } from "astro"
 
 import PostExcerpt from "@/components/post-excerpt.astro"
 import Sidebar from "@/components/sidebar.astro"
@@ -46,10 +46,10 @@ const { page, uniqueTags, uniqueCategories } = Astro.props
             <PostExcerpt text={body} maxLength={210} />
           </p>
           <div class="my-3">
-            <p class="flex justify-center font-lucida text-xs">
-              <span class="mr-1 text-gray-lucky">Tags:</span> {
+            <p class="flex justify-center font-lucida text-xs gap-x-1">
+              <span class="text-gray-lucky">Tags:</span> {
                 tags?.map((tag, index) => (
-                  <span >
+                  <span>
                     <a class="text-blue-french hover:text-blue-maritime hover:underline" href={`/tags/${tag}`}>{tag}</a>{index < tags.length - 1 && ', '}
                   </span>
                 ))
