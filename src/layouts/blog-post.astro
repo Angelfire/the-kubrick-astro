@@ -12,9 +12,10 @@ interface Props {
   description: string
   title: string
   slug?: string
+  image?: string
 }
 
-const { author, title, description, slug } = Astro.props
+const { author, image, description, slug, title } = Astro.props
 ---
 
 <!doctype html>
@@ -25,6 +26,7 @@ const { author, title, description, slug } = Astro.props
       title={title}
       description={description}
       slug={slug}
+      ogImage={image}
     />
     <ViewTransitions />
   </head>

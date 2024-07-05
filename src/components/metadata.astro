@@ -1,16 +1,18 @@
 ---
+import { siteConfig } from "@/site.config"
+
 export interface Props {
   author: string
   description: string
   title: string
   slug?: string
+  ogImage?: string
 }
 
+const { author, description, ogImage, title } = Astro.props
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
-
-import { siteConfig } from "@/site.config"
-
-const { author, description, title } = Astro.props
+const socialImageURL = new URL(ogImage ? ogImage : "/open-graph.jpg", Astro.url).href
 ---
 
 <!-- Global Metadata -->
@@ -36,10 +38,7 @@ const { author, description, title } = Astro.props
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<!-- <meta
-  property="og:image"
-  content={slug ? new URL(`/${slug}/og.png`, Astro.url) : new URL("/images/ve.png", Astro.url)}
-/> -->
+<meta property='og:image' content={socialImageURL} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content={title} />
@@ -51,10 +50,7 @@ const { author, description, title } = Astro.props
 <meta property="twitter:url" content={Astro.url} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<!-- <meta
-  name="twitter:image"
-  content={slug ? new URL(`/${slug}/og.png`, Astro.url) : new URL("/images/ve.png", Astro.url)}
-/> -->
+<meta name="twitter:image" content={socialImageURL} />
 <meta name="twitter:image:alt" content={title} />
 
 <!-- RSS auto-discovery -->

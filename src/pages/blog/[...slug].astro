@@ -31,6 +31,7 @@ const { Content } = await post.render()
   description={description}
   title={title}
   slug={post.slug}
+  image={post.data?.heroImage}
 >
   {heroImage && <Image width={720} height={360} src={heroImage} alt="" class="mb-4" />}
   <div class="prose prose-p:font-lucida prose-p:text-xs prose-a:text-blue-french prose-a:no-underline prose-a:hover:text-blue-maritime prose-a:hover:underline prose-ul:ml-3 prose-ul:mt-1 prose-ul:leading-3 prose-ul:text-xs pprose-uprose-ul prose-ul:font-lucida">
