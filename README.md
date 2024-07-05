@@ -1,35 +1,19 @@
 # Astro Starter Kit: Kubrick theme
 
-![kubrick-astro](https://github.com/Angelfire/the-kubrick-astro/assets/315504/9cf3d0e2-4c8a-475e-946e-1afd03a99256)
+![kubrick-astro-theme](https://github.com/Angelfire/the-kubrick-astro/assets/315504/0015c42b-0612-483d-a477-9afd1bdcd4bb)
 
-```sh
-npm create astro@latest -- --template minimal
-```
+## Features
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
+- ✅ Minimal styling
+- ✅ SEO-friendly with canonical URLs and OpenGraph data
+- ✅ Sitemap support
+- ✅ RSS Feed support
+- ✅ Markdown & MDX support
+- ✅ Syntax highlighting
+- ✅ Image optimization
+- ✅ Pagination
+- ✅ ViewTransition
+- ✅ Support for custom pages
 
 ## 🧞 Commands
 
