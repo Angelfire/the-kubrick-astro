@@ -37,7 +37,7 @@ const { page, uniqueTags, uniqueCategories } = Astro.props
       page.data.map(({ slug, body, data: { category, heroImage, title, pubDate, tags } }) => (
         <article class="mb-10">
           <h2 class="font-bold font-trebuchet text-xl text-gray-carbon">
-            <a href={`/blog/${slug}/`}>{title}</a>
+            <a class="hover:text-blue-french" href={`/blog/${slug}/`}>{title}</a>
           </h2>
           <p class="font-arial text-xs text-gray-lucky">
             <time datetime={pubDate.toISOString()}>{formatDate(pubDate, 'short')}</time>
